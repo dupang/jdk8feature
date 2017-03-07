@@ -13,8 +13,10 @@ import java.time.Month;
 import java.time.MonthDay;
 import java.time.OffsetDateTime;
 import java.time.Period;
+import java.time.YearMonth;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
@@ -95,43 +97,40 @@ public class NewDateTest extends TestCase{
         // Returns the current time based on your system clock and set to UTC.
         Clock clock = Clock.systemUTC();
         System.out.println("Clock : " + clock);
+                Clock.systemDefaultZone();
+        System.out.println("Clock : " + clock);
+    }
+
+    public void testAfterAndBefore(){
+        LocalDate today = LocalDate.now();
+        LocalDate tomorrow = LocalDate.of(2014, 1, 15);
+        if(tomorrow.isAfter(today)){
+            System.out.println("Tomorrow comes after today");
+        }
+        LocalDate yesterday = today.minus(1, ChronoUnit.DAYS);
+        if(yesterday.isBefore(today)){
+            System.out.println("Yesterday is day before today");
+        }
+    }
+
+
+    public void testLocalDateTime(){
+        LocalDateTime localtDateAndTime = LocalDateTime.now();
+        ZonedDateTime dateAndTimeInNewYork = ZonedDateTime.of(localtDateAndTime, ZoneId.of("America/Los_Angeles"));
+        System.out.println("Current date and time in a particular timezone : " + dateAndTimeInNewYork);
+    }
+
+    public void testYearMonth(){
+        YearMonth currentYearMonth = YearMonth.now();
+        System.out.printf("Days in month year %s: %d%n", currentYearMonth, currentYearMonth.lengthOfMonth());
+        YearMonth creditCardExpiry = YearMonth.of(2018, Month.FEBRUARY);
+        System.out.printf("Your credit card expires on %s %n", creditCardExpiry);
     }
 
 
     public static void main(String[] args) {
 
         LocalDate today = LocalDate.now();
-
-//
-
-
-
-
-//
-//        // Returns time based on system clock zone Clock defaultClock =
-//        Clock.systemDefaultZone();
-//        System.out.println("Clock : " + clock);
-//
-//
-//        LocalDate tomorrow = LocalDate.of(2014, 1, 15);
-//        if(tomorrow.isAfter(today)){
-//            System.out.println("Tomorrow comes after today");
-//        }
-//        LocalDate yesterday = today.minus(1, ChronoUnit.DAYS);
-//        if(yesterday.isBefore(today)){
-//            System.out.println("Yesterday is day before today");
-//        }
-//
-//
-//
-//        LocalDateTime localtDateAndTime = LocalDateTime.now();
-//        ZonedDateTime dateAndTimeInNewYork = ZonedDateTime.of(localtDateAndTime, ZoneId.of("America/Los_Angeles"));
-//        System.out.println("Current date and time in a particular timezone : " + dateAndTimeInNewYork);
-//
-//        YearMonth currentYearMonth = YearMonth.now();
-//        System.out.printf("Days in month year %s: %d%n", currentYearMonth, currentYearMonth.lengthOfMonth());
-//        YearMonth creditCardExpiry = YearMonth.of(2018, Month.FEBRUARY);
-//        System.out.printf("Your credit card expires on %s %n", creditCardExpiry);
 
 //        if(today.isLeapYear()){
 //            System.out.println("This year is Leap year");
