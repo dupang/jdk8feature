@@ -477,5 +477,145 @@ public class StreamTest extends TestCase{
 
 
 
+    /**
+     * distinct
+     */
+    public void testDistinct() {
+        List<String> strList = new ArrayList<>();
+        strList.add("dupang");
+        strList.add("dupang");
+        strList.add("beijing");
+        strList.add("linux");
+        strList.add("java");
+
+        strList.stream().distinct().forEach(x -> System.out.println(x));
+    }
+
+
+    /**
+     * limit
+     */
+    public void testLimit() {
+        List<String> strList = new ArrayList<>();
+        strList.add("dupang");
+        strList.add("dupang");
+        strList.add("beijing");
+        strList.add("linux");
+        strList.add("java");
+
+        strList.stream().limit(2).forEach(x -> System.out.println(x));
+    }
+
+    /**
+     * forEachOrdered
+     */
+    public void testForeachorder() {
+        List<String> strList = new ArrayList<>();
+        strList.add("dupang");
+        strList.add("dupang");
+        strList.add("beijing");
+        strList.add("linux");
+        strList.add("java");
+
+
+        strList.stream().forEachOrdered(x -> System.out.println(x));
+    }
+
+
+    /**
+     * max
+     */
+
+    public void testMax() {
+        List<String> strList = new ArrayList<>();
+        strList.add("dupang");
+        strList.add("dupang");
+        strList.add("beijing");
+        strList.add("linux");
+        strList.add("java");
+
+        System.out.println(strList.stream().max((x, y) -> x.compareTo(y)).get());
+    }
+
+    /**
+     * min
+     */
+
+    public void testMin() {
+        List<String> strList = new ArrayList<>();
+        strList.add("dupang");
+        strList.add("dupang");
+        strList.add("beijing");
+        strList.add("linux");
+        strList.add("java");
+        System.out.println(strList.stream().min((x, y) -> x.compareTo(y)).get());
+    }
+
+    /**
+     * peek
+     */
+
+    public void testPeek() {
+        List<String> strList = new ArrayList<>();
+        strList.add("dupang");
+        strList.add("dupang");
+        strList.add("beijing");
+        strList.add("linux");
+        strList.add("java");
+        strList.stream().peek(x -> System.out.println(x));
+
+        Stream.of("one", "two", "three", "four").filter(e -> e.length() > 3)
+                .peek(e -> System.out.println("Filtered value: " + e))
+                .map(String::toUpperCase)
+                .peek(e -> System.out.println("Mapped value: " + e))
+                .collect(Collectors.toList());
+    }
+
+
+    /**
+     * skip
+     */
+    public void testSkip() {
+        List<String> strList = new ArrayList<>();
+        strList.add("dupang");
+        strList.add("dupang");
+        strList.add("beijing");
+        strList.add("linux");
+        strList.add("java");
+
+        System.out.println("========================skip===============================");
+        strList.stream().skip(2).forEach(x -> System.out.println(x));
+    }
+
+    /**
+     * reduce(BinaryOperator<T> accumulator)
+     */
+    public void testReduce() {
+        List<String> strList = new ArrayList<>();
+        strList.add("dupang");
+        strList.add("dupang");
+        strList.add("beijing");
+        strList.add("linux");
+        strList.add("java");
+        System.out.println(strList.stream().reduce((x, y) -> x.concat(y)).get());
+    }
+
+
+    /**
+     * reduce(T identity, BinaryOperator<T> accumulator);
+     */
+
+
+    public void testReduce2() {
+        List<String> strList = new ArrayList<>();
+        strList.add("dupang");
+        strList.add("dupang");
+        strList.add("beijing");
+        strList.add("linux");
+        strList.add("java");
+        System.out.println(strList.stream().reduce("Begin=", (x, y) -> x.concat(y)));
+    }
+
+
 
 }
