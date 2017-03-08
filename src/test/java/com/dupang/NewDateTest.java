@@ -2,7 +2,6 @@ package com.dupang;
 
 import junit.framework.TestCase;
 
-import java.text.SimpleDateFormat;
 import java.time.Clock;
 import java.time.DateTimeException;
 import java.time.Instant;
@@ -127,37 +126,50 @@ public class NewDateTest extends TestCase{
         System.out.printf("Your credit card expires on %s %n", creditCardExpiry);
     }
 
-
-    public static void main(String[] args) {
-
+    /**
+     * 判断是否是闰年
+     */
+    public void testLeapYear(){
         LocalDate today = LocalDate.now();
+        if(today.isLeapYear()){
+            System.out.println("This year is Leap year");
+        }else {
+            System.out.println("2017 is not a Leap year");
+        }
+    }
 
-//        if(today.isLeapYear()){
-//            System.out.println("This year is Leap year");
-//        }else {
-//            System.out.println("2014 is not a Leap year");
-//        }
+    /**
+     * 时间距离
+     */
+    public void testPeriod(){
+        LocalDate today = LocalDate.now();
 
         LocalDate java8Release = LocalDate.of(2014, Month.MARCH, 14);
         Period periodToNextJavaRelease =
-                Period.between(today, java8Release);
-        System.out.println("Months left between today and Java 8 release : " + periodToNextJavaRelease.getMonths() );
+                Period.between(java8Release, today);
+        System.out.println("Months left between today and Java 8 release : " + periodToNextJavaRelease.getYears() );
+    }
 
-
+    public void testZoneOffset(){
         LocalDateTime datetime = LocalDateTime.of(2014, Month.JANUARY, 14, 19, 30);
         ZoneOffset offset = ZoneOffset.of("+05:30");
         OffsetDateTime date = OffsetDateTime.of(datetime, offset);
         System.out.println("Date and Time with timezone offset in Java : " + date);
+    }
 
+    public void testInstant(){
         Instant timestamp = Instant.now();
         System.out.println("What is value of this instant " + timestamp);
+    }
 
+    public void testFormate(){
         String dayAfterTommorrow = "20140116";
         LocalDate formatted = LocalDate.parse(dayAfterTommorrow,
                 DateTimeFormatter.BASIC_ISO_DATE);
         System.out.printf("Date generated from String %s is %s %n", dayAfterTommorrow, formatted);
+    }
 
-
+    public void testParse(){
         String goodFriday = "12 18 2014";
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM dd yyyy");
@@ -167,7 +179,9 @@ public class NewDateTest extends TestCase{
             System.out.printf("%s is not parsable!%n", goodFriday);
             ex.printStackTrace();
         }
+    }
 
+    public void testformat(){
         LocalDateTime arrivalDate = LocalDateTime.now();
         try {
             DateTimeFormatter format = DateTimeFormatter.ofPattern("MM dd yyyy hh:mm a");
@@ -177,19 +191,20 @@ public class NewDateTest extends TestCase{
             System.out.printf("%s can't be formatted!%n", arrivalDate);
             ex.printStackTrace();
         }
+    }
 
-
+    public void testZooId(){
         ZoneId zoneId = ZoneId.systemDefault();
 
         System.out.printf(""+zoneId);
+    }
 
+    public static void main(String[] args) {
         Clock clock = Clock.systemDefaultZone();
         Instant timestamp2 = Instant.now(clock);
         OffsetDateTime ddd = Instant.now().atOffset(ZoneOffset.ofHours(8));
         System.out.println("What is value of this instant " + timestamp2);
 
         System.out.println("What is value of this instant " + ddd);
-
-        SimpleDateFormat sdf = new SimpleDateFormat("");
     }
 }
