@@ -27,7 +27,10 @@ import java.util.Date;
 public class NewDateTest extends TestCase{
 
 
-    public void testNow(){
+    /**
+     * 不带时间的日期
+     */
+    public void testDate(){
         LocalDate today = LocalDate.now();
         System.out.println("Today's Local date : " + today);
 
@@ -36,6 +39,23 @@ public class NewDateTest extends TestCase{
         int month = today.getMonthValue();
         int day = today.getDayOfMonth();
         System.out.printf("Year : %d Month : %d day : %d \t %n", year, month, day);
+    }
+
+    /**
+     * 只有时间
+     */
+    public void testTime(){
+        LocalTime time = LocalTime.now();
+        System.out.println("Local time : " + time);
+    }
+
+    /**
+     * 日期和时间
+     */
+    public void testDateTime(){
+        LocalDateTime dateTime = LocalDateTime.now();
+
+        System.out.println("Local dateTime "+dateTime);
     }
 
     public void testOf(){
@@ -64,6 +84,10 @@ public class NewDateTest extends TestCase{
             System.out.println("Sorry, today is not your birthday");
         }
     }
+
+
+    // 新时间和老时间的不同 可变和不可变
+    //String 是不可变的immutable，
 
     public void testLocalTime(){
         LocalTime time = LocalTime.now();
