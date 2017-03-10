@@ -2,6 +2,7 @@ package com.dupang;
 
 import junit.framework.TestCase;
 
+import java.text.SimpleDateFormat;
 import java.time.Clock;
 import java.time.DateTimeException;
 import java.time.Instant;
@@ -19,6 +20,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -96,9 +98,17 @@ public class NewDateTest extends TestCase{
         LocalTime newTime = time.plusHours(2); // adding two hours
         System.out.println("Time after 2 hours : " + newTime);
 
-        Date datanow = new Date();
-        datanow.setYear(17);;
-        System.out.println("====================="+datanow);
+        Date datenow = new Date();
+        datenow.setMonth(5);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+        String dateStr = sdf.format(datenow);
+        System.out.println("====================="+dateStr);
+    }
+
+    public void testCalendar(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2016,11,30);
+        System.out.println("======================"+calendar.getTime());
     }
 
     public void testNextWeek(){
