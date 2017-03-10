@@ -9,8 +9,10 @@ package com.dupang;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
+import java.util.DoubleSummaryStatistics;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 import java.util.function.BiConsumer;
@@ -288,7 +290,10 @@ public class StreamTest extends TestCase{
         strList.add("beijing");
         strList.add("linux");
         strList.add("java");
-        System.out.println(strList.stream().collect(Collectors.groupingBy(x->x.length(), Collectors.summingInt(p->1))));
+       Map<Integer,Integer> map = strList.stream().collect(Collectors.groupingBy(x->x.length(), Collectors.summingInt
+               (p->1)));
+
+        System.out.println(map);
     }
     /**
      * groupingBy
@@ -345,7 +350,12 @@ public class StreamTest extends TestCase{
         strList.add("beijing");
         strList.add("linux");
         strList.add("java");
-        System.out.println(strList.stream().collect(Collectors.summarizingDouble(x->x.length())));
+         DoubleSummaryStatistics summary  = strList.stream().collect(Collectors.summarizingDouble(x->x.length()));
+        System.out.println("平均数===="+summary.getAverage());
+        System.out.println("总数===="+summary.getCount());
+        System.out.println("最大数===="+summary.getMax());
+        System.out.println("最小数===="+summary.getMin());
+        System.out.println("总数===="+summary.getSum());
     }
 
     /**
@@ -411,7 +421,9 @@ public class StreamTest extends TestCase{
         strList.add("beijing");
         strList.add("linux");
         strList.add("java");
-        System.out.println(strList.stream().collect(Collectors.partitioningBy(x->x.length()>5)));
+       Map<Boolean,List<String>> map = strList.stream().collect(Collectors.partitioningBy(x->x.length()>5));
+
+        System.out.println(map);
     }
 
 
@@ -425,7 +437,10 @@ public class StreamTest extends TestCase{
         strList.add("beijing");
         strList.add("linux");
         strList.add("java");
-        System.out.println(strList.stream().collect(Collectors.partitioningBy(x->x.length()>5, Collectors.counting())));
+        Map<Boolean,Long> map = strList.stream().collect(Collectors.partitioningBy(x->x.length()>5, Collectors
+                .counting()));
+
+        System.out.println(map);
     }
 
     /**
@@ -440,7 +455,9 @@ public class StreamTest extends TestCase{
         strList.add("beijing");
         strList.add("linux");
         strList.add("java");
-        System.out.println(strList.stream().collect(Collectors.joining()));
+        String str = strList.stream().collect(Collectors.joining());
+
+        System.out.println(str);
     }
 
     /**
@@ -453,7 +470,8 @@ public class StreamTest extends TestCase{
         strList.add("beijing");
         strList.add("linux");
         strList.add("java");
-        System.out.println(strList.stream().collect(Collectors.joining(",")));
+        String str = strList.stream().collect(Collectors.joining(","));
+        System.out.println(str);
     }
 
     /**
@@ -466,7 +484,8 @@ public class StreamTest extends TestCase{
         strList.add("beijing");
         strList.add("linux");
         strList.add("java");
-        System.out.println(strList.stream().collect(Collectors.joining(",","(",")")));
+        String str = strList.stream().collect(Collectors.joining(",","(",")"));
+        System.out.println(str);
     }
 
 
